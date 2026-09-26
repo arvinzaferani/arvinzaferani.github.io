@@ -46,6 +46,7 @@ export const projects: Project[] = [
       "An expense sharing and settlement platform for friends and groups, built around real-world payment splitting workflows.",
     role: "Personal project — full-stack, end to end",
     year: "2026",
+    url: "https://kidad.ir",
     icon: "/projects/kidad/icon.png",
     image: "/projects/kidad/preview.png",
     stack: [
@@ -75,6 +76,7 @@ export const projects: Project[] = [
       "An integrated platform for legal services, covering product development, frontend architecture, backend integration and production infrastructure.",
     role: "Freelance — end-to-end technical ownership",
     year: "2026 – present",
+    url: "https://tokiliran.com",
     icon: "/projects/tokiliran/icon.svg",
     image: "/projects/tokiliran/preview.png",
     stack: [
@@ -103,6 +105,7 @@ export const projects: Project[] = [
       "A Persian, right-to-left web platform for the whole training cycle: coaches build multi-week programs, assign them to athletes and tailor every set, while athletes follow, log and track their progress.",
     role: "Full-stack developer",
     year: "[FITCOACH_YEAR]",
+    url: "https://github.com/arvinzaferani/fitcoach",
     icon: "/projects/fitcoach/icon.svg",
     image: "/projects/fitcoach/preview.png",
     stack: [
