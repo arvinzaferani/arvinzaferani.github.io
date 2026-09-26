@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/* §16 — Minimal + Editorial + Premium + Technical
+   Warm off-white base, near-black text, subtle saffron accent. */
+@theme {
+  --color-background: hsl(30 100% 98%);
+  --color-foreground: hsl(20 20% 12%);
+  --color-muted: hsl(20 12% 42%);
+  /* §16 — real saffron, used only as a signature detail, never as a theme. */
+  --color-accent: hsl(38 92% 48%);
+  --color-card: hsl(30 40% 99%);
+  --color-border: hsl(28 22% 87%);
+
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-serif: var(--font-serif), Georgia, "Times New Roman", serif;
+
+  --text-display: clamp(2.75rem, 12vw, 9rem);
+  --text-chapter: clamp(2rem, 6vw, 4.5rem);
+}
+
+/* §16 — the hero flow field reads its colors from here, as bare RGB channel
+   triplets (the 2D context cannot parse `hsl()`). Deliberately the same warm
+   neutrals and saffron as the tokens above, kept in sync by hand:
+   muted hsl(20 12% 42%) → 120 111 94, accent hsl(38 92% 48%) → 225 143 0. */
+:root {
+  --flow-line: 120 111 94;
+  --flow-accent: 225 143 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* §21 — sticky + transform animations must not create a horizontal scrollbar. */
+  overflow-x: clip;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  overscroll-behavior-y: none;
+  text-rendering: optimizeLegibility;
+}
+
+/* §15 — headlines must be serif; body/UI stays sans. */
+.font-display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-foreground);
+}
+
+/* Keep the saffron accent quiet. */
+.accent-dot {
+  box-shadow: 0 0 0 3px hsl(38 92% 48% / 0.18);
+}
+
+@keyframes hero-rise {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@utility animate-hero-rise {
+  animation: hero-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@utility animate-hero-rise-delayed {
+  animation: hero-rise 0.7s 0.08s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@utility animate-hero-fade {
+  animation: hero-fade 0.8s 0.05s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@utility animate-rise {
+  animation: hero-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
