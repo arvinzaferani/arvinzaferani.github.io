@@ -53,6 +53,8 @@ export default function Chapter01Intro({ t }: { t: Dictionary }) {
             page background, so the serif headline stays the hero (§15/§25). */}
         <FluidFlowGrid className="opacity-10" />
 
+
+
         <div className="relative z-10 mx-auto w-full max-w-6xl px-6">
           <h1 className="font-display text-display leading-[0.92]">
             <span className="block overflow-hidden pb-[0.08em]">
