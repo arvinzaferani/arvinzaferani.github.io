@@ -1,4 +1,4 @@
-export const locales = ["en", "fa"] as const;
+export const locales = ["en"] as const;
 
 export type Locale = (typeof locales)[number];
 
@@ -6,12 +6,10 @@ export const defaultLocale: Locale = "en";
 
 export const localeDirection: Record<Locale, "ltr" | "rtl"> = {
   en: "ltr",
-  fa: "rtl",
 };
 
 export const localeLabels: Record<Locale, string> = {
   en: "EN",
-  fa: "فا",
 };
 
 export function isLocale(value: string): value is Locale {
@@ -20,5 +18,4 @@ export function isLocale(value: string): value is Locale {
 
 export const htmlLang: Record<Locale, string> = {
   en: "en",
-  fa: "fa",
 };

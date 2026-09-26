@@ -69,30 +69,32 @@ export default function Navigation({
             ))}
           </ul>
 
-          <div
-            className="flex items-center gap-1 text-xs tracking-[0.15em]"
-            role="group"
-            aria-label="Language"
-          >
-            {locales.map((code) => {
-              const isActive = code === locale;
-              return (
-                <Link
-                  key={code}
-                  href={switchLocale(code)}
-                  hrefLang={code}
-                  aria-current={isActive ? "true" : undefined}
-                  className={`px-2 py-1 transition-colors duration-300 ${
-                    isActive
-                      ? "text-foreground"
-                      : "text-foreground/35 hover:text-foreground/70"
-                  }`}
-                >
-                  {localeLabels[code]}
-                </Link>
-              );
-            })}
-          </div>
+          {locales.length > 1 && (
+            <div
+              className="flex items-center gap-1 text-xs tracking-[0.15em]"
+              role="group"
+              aria-label="Language"
+            >
+              {locales.map((code) => {
+                const isActive = code === locale;
+                return (
+                  <Link
+                    key={code}
+                    href={switchLocale(code)}
+                    hrefLang={code}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`px-2 py-1 transition-colors duration-300 ${
+                      isActive
+                        ? "text-foreground"
+                        : "text-foreground/35 hover:text-foreground/70"
+                    }`}
+                  >
+                    {localeLabels[code]}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
         </div>
       </nav>
     </header>

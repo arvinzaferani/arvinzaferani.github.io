@@ -2,8 +2,6 @@ import type { NextConfig } from "next";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-import { defaultLocale } from "./lib/i18n";
-
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
@@ -14,14 +12,9 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: projectRoot,
   },
-  // `app/[locale]/layout.tsx` is the only layout, so it owns <html lang dir>.
-  // Adding a second `app/layout.tsx` would nest <html>/<body> and the browser
-  // would drop `dir="rtl"`, breaking the Persian layout (§22).
-  async redirects() {
-    return [
-      { source: "/", destination: `/${defaultLocale}`, permanent: true },
-    ];
-  },
+  // `app/layout.tsx` is the only layout, so it owns <html lang dir>. Adding a
+  // second nested layout would nest <html>/<body> and the browser would drop
+  // `dir="rtl"`, breaking the Persian layout (§22).
   async headers() {
     return [
       {

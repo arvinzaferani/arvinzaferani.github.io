@@ -10,17 +10,11 @@ import OtherWork from "@/components/chapters/OtherWork";
 import ChapterCounter from "@/components/site/ChapterCounter";
 import { hasPublicAsset } from "@/lib/assets";
 import { getDictionary } from "@/lib/dictionaries";
-import { isLocale } from "@/lib/i18n";
+import { defaultLocale } from "@/lib/i18n";
 import { projects } from "@/lib/projects";
 
-export default async function LocalePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale: raw } = await params;
-  const locale = isLocale(raw) ? raw : "en";
-  const t = getDictionary(locale);
+export default function Page() {
+  const t = getDictionary(defaultLocale);
 
   // §7 / §8 — only reference an icon or screenshot that actually exists, so
   // the page never ships a 404 (or a wasted `priority` preload) for it.

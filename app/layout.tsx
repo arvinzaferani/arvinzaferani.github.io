@@ -1,10 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
-import { notFound } from "next/navigation";
 import { getDictionary } from "@/lib/dictionaries";
-import { htmlLang, isLocale, localeDirection, locales } from "@/lib/i18n";
+import { defaultLocale, htmlLang, localeDirection } from "@/lib/i18n";
 import { contact, site } from "@/lib/site";
-import "../globals.css";
+import "./globals.css";
 
 /** §15 — serif for headlines, sans for body/UI. */
 const serif = Fraunces({
@@ -26,17 +25,8 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const t = getDictionary(isLocale(locale) ? locale : "en");
+export async function generateMetadata(): Promise<Metadata> {
+  const t = getDictionary(defaultLocale);
   const title = `${site.name} — ${t.hero.role}`;
   const description = `${t.contact.headingLine1} ${t.contact.body} ${site.description}`;
 
@@ -48,20 +38,15 @@ export async function generateMetadata({
     authors: [{ name: site.name, url: site.url }],
     creator: site.name,
     alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        en: "/en",
-        fa: "/fa",
-      },
+      canonical: "/",
     },
     openGraph: {
       type: "website",
-      url: `/${locale}`,
+      url: "/",
       siteName: site.name,
       title,
       description,
-      locale: locale === "fa" ? "fa_IR" : "en_US",
-      alternateLocale: locale === "fa" ? "en_US" : "fa_IR",
+      locale: "en_US",
       images: [{ url: "/og.png", width: 1200, height: 630, alt: title }],
     },
     twitter: {
@@ -78,21 +63,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function LocaleLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-
-  if (!isLocale(locale)) notFound();
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang={htmlLang[locale]}
-      dir={localeDirection[locale]}
+      lang={htmlLang[defaultLocale]}
+      dir={localeDirection[defaultLocale]}
       className={`${serif.variable} ${sans.variable}`}
       suppressHydrationWarning
     >
