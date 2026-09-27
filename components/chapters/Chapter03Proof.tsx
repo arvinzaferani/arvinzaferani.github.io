@@ -19,6 +19,7 @@ export default function Chapter03Proof({
   assets: ProjectAssets;
 }) {
   const [index, setIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -32,6 +33,7 @@ export default function Chapter03Proof({
 
       const progress = Math.min(Math.max(-rect.top / scrollable, 0), 1);
       setIndex(Math.min(projects.length - 1, Math.floor(progress * projects.length)));
+      setProgress(progress);
     };
 
     handleScroll();
@@ -57,10 +59,6 @@ export default function Chapter03Proof({
         <header className="mb-7 flex items-baseline justify-between gap-6">
           <p className="text-[0.65rem] uppercase tracking-[0.3em] text-foreground/40">
             {t.proof.label}
-          </p>
-          <p className="text-[0.65rem] uppercase tracking-[0.25em] text-foreground/35">
-            {String(index + 1).padStart(2, "0")} /{" "}
-            {String(projects.length).padStart(2, "0")}
           </p>
         </header>
 
@@ -180,15 +178,32 @@ export default function Chapter03Proof({
             These steps can graduate into dedicated case-study pages later. */}
         <ProjectStory project={project} t={t} />
 
-        <div className="mt-8 flex items-center gap-3">
-          {projects.map((item, i) => (
+        {/* §3 — position inside the chapter, read continuously rather than per
+            project, so the line glides instead of stepping. The transition is
+            what makes it feel animated: the raw value is jumpy, 150ms of ease
+            turns it into motion. The SCROLL nudge retires once the reader has
+            already scrolled, so it never nags. */}
+        <div className="mt-8 flex items-center gap-4 text-[0.65rem] uppercase tracking-[0.25em] text-foreground/40">
+          <span className="tabular-nums">
+            {String(index + 1).padStart(2, "0")} /{" "}
+            {String(projects.length).padStart(2, "0")}
+          </span>
+          <span className="relative h-px flex-1 bg-border">
             <span
-              key={item.slug}
-              className={`h-px flex-1 transition-colors duration-500 ${
-                i <= index ? "bg-accent" : "bg-border"
-              }`}
+              className="absolute inset-y-0 start-0 bg-accent transition-[width] duration-150 ease-out"
+              style={{ width: `${progress * 100}%` }}
             />
-          ))}
+          </span>
+          <span
+            className={`hidden items-center gap-1.5 transition-opacity duration-500 sm:inline-flex ${
+              index > 0 ? "opacity-0" : "opacity-100"
+            }`}
+          >
+            {t.proof.scrollHint}
+            <span className="animate-scroll-nudge" aria-hidden="true">
+              ↓
+            </span>
+          </span>
         </div>
       </div>
     </section>

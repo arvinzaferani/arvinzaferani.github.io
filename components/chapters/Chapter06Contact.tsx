@@ -29,10 +29,6 @@ export default function Chapter06Contact({ t }: { t: Dictionary }) {
         >
           {t.contact.cta} →
         </a>
-        <span className="inline-flex items-center gap-2 text-sm text-foreground/55">
-          <span className="accent-dot inline-block h-1.5 w-1.5 rounded-full bg-accent" />
-          {t.contact.availability}
-        </span>
       </div>
 
       <dl className="mt-20 grid gap-x-10 gap-y-8 border-t border-border pt-10 sm:grid-cols-2 lg:grid-cols-4">

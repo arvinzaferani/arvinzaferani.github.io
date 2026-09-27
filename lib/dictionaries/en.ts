@@ -37,10 +37,14 @@ export type Dictionary = {
     storyLabel: string;
     storySteps: { idea: string; problem: string; design: string; build: string; deploy: string };
     screenshotPending: string;
+    /** Mobile-only cue that this chapter advances by scrolling. */
+    scrollHint: string;
   };
   otherWork: {
     label: string;
     heading: string;
+    /** Prefix for the organization/company a piece of work was done for. */
+    orgLabel: string;
   };
   process: {
     label: string;

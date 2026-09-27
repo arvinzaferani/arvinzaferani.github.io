@@ -37,13 +37,13 @@ export default function Page() {
         <Chapter01Intro t={t} />
         {/* CAPABILITY */}
         <Chapter02Capability t={t} />
+        {/* ABOUT */}
+        <Chapter05About t={t} />
         {/* PROOF */}
         <Chapter03Proof t={t} assets={assets} />
         <OtherWork t={t} />
         {/* PROCESS */}
         <Chapter04Process t={t} />
-        {/* ABOUT */}
-        <Chapter05About t={t} />
         {/* CONTACT */}
         <Chapter06Contact t={t} />
       </main>

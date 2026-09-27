@@ -70,10 +70,12 @@ export const fa: Dictionary = {
       deploy: "استقرار",
     },
     screenshotPending: "تصویر در انتظار",
+    scrollHint: "اسکرول",
   },
   otherWork: {
     label: "سایر کارها",
     heading: "پروژه‌های دیگر",
+    orgLabel: "سازمان",
   },
   process: {
     label: "فرآیند",
@@ -136,9 +138,9 @@ export const fa: Dictionary = {
   chapters: [
     { id: "intro", label: "شروع" },
     { id: "capability", label: "توانمندی" },
+    { id: "about", label: "درباره" },
     { id: "proof", label: "کارها" },
     { id: "process", label: "فرآیند" },
-    { id: "about", label: "درباره" },
     { id: "contact", label: "تماس" },
   ],
 };

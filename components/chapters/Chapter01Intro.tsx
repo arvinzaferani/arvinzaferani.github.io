@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import FluidFlowGrid from "@/components/ui/fluid-flow-grid";
 import type { Dictionary } from "@/lib/dictionaries";
 
@@ -12,21 +13,30 @@ export default function Chapter01Intro({ t }: { t: Dictionary }) {
   const [index, setIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-
+  const refEl = useRef<HTMLSpanElement>(null);
+  const [pinned, setPinned] = useState(false);
   const phases = t.hero.phases;
 
   useEffect(() => {
+    const el = refEl.current;
+    if (!el) return;
+
+
     const handleScroll = () => {
       const section = sectionRef.current;
       if (!section) return;
 
       const rect = section.getBoundingClientRect();
       const travel = rect.height - window.innerHeight;
+
       if (travel <= 0) return;
 
       const p = Math.min(Math.max(-rect.top / travel, 0), 1);
       setProgress(p);
-      setIndex(Math.min(phases.length - 1, Math.floor(p * phases.length)));
+
+      setIndex(Math.min(phases.length - 1, Math.floor(p * phases.length)))
+      const update = () => setPinned(el.getBoundingClientRect().top - 20 <= 0 && -rect.top + window.innerHeight >= rect.height);
+      update();
     };
 
     handleScroll();
@@ -72,22 +82,21 @@ export default function Chapter01Intro({ t }: { t: Dictionary }) {
             </span>
           </h1>
 
-          <div
-            className="transition-opacity duration-500"
-            style={{ opacity: 1 - chromeFade }}
-          >
+          <div          >
             <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-foreground/60">
-              <span>{t.hero.role}</span>
-              <span className="text-foreground/25">·</span>
-              <span>{t.hero.city}</span>
-              <span className="text-foreground/25">·</span>
-              <span className="inline-flex items-center gap-2">
-                <span className="accent-dot inline-block h-1.5 w-1.5 rounded-full bg-accent" />
-                {t.hero.available}
-              </span>
+            <div className="flex flex-col">
+
+              <div className="transition-opacity duration-500"
+                style={{ opacity: 1 - chromeFade }}>{t.hero.role}</div>
+              {/* <div className="text-foreground/25 transition-opacity duration-500"
+                style={{ opacity: 1 - chromeFade }}>·</div> */}
+                <div className="transition-opacity duration-500" style={{ opacity: 1 - chromeFade }}>{t.hero.city}</div>
+                {/* <div className="text-foreground/25 transition-opacity duration-500" style={{ opacity: 1 - chromeFade }}>·</div> */}
+              </div>
+              
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap gap-3 transition-opacity duration-500" style={{ opacity: 1 - chromeFade }}>
               <a
                 href="#contact"
                 className="rounded-full bg-foreground px-7 py-3 text-sm font-medium text-background transition-transform duration-300 hover:-translate-y-0.5"
@@ -101,6 +110,19 @@ export default function Chapter01Intro({ t }: { t: Dictionary }) {
                 {t.hero.ctaSecondary} →
               </a>
             </div>
+            <span ref={refEl} className={pinned ? "invisible" : undefined}>
+                <Badge label={t.hero.available} />
+              </span>
+
+              {typeof document !== "undefined" &&
+                createPortal(
+                  pinned ? (
+                    <span className="fixed top-4 start-6 z-50">
+                      <Badge label={t.hero.available} floating />
+                    </span>
+                  ) : null,
+                  document.body,
+                )}
           </div>
         </div>
 
@@ -125,5 +147,22 @@ export default function Chapter01Intro({ t }: { t: Dictionary }) {
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * The badge is an anchor, not a decoration: clicking it — pinned or in the hero —
+ * takes the reader to the last chapter. It stays the flex item it was as a span,
+ * so the hero's `mt-8` offset and the pill's box are untouched.
+ */
+function Badge({ label, floating }: { label: string; floating?: boolean }) {
+  return (
+    <a
+      href="#contact"
+      className={`inline-flex items-center gap-2 text-sm text-foreground/60 rounded-full  bg-background px-4 py-2 border border-border transition-colors duration-300 hover:border-foreground/40 hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${floating ? '' : 'mt-8'}`}
+    >
+      <span className="accent-dot inline-block h-1.5 w-1.5 rounded-full bg-green-500" />
+      {label}
+    </a>
   );
 }

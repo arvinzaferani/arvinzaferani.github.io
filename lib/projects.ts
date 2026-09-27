@@ -75,9 +75,9 @@ export const projects: Project[] = [
     description:
       "An integrated platform for legal services, covering product development, frontend architecture, backend integration and production infrastructure.",
     role: "Freelance — end-to-end technical ownership",
-    year: "2026 – present",
+    year: "2026",
     url: "https://tokiliran.com",
-    icon: "/projects/tokiliran/icon.svg",
+    icon: "/projects/tokiliran/icon.png",
     image: "/projects/tokiliran/preview.png",
     stack: [
       { name: "Next.js", url: "https://nextjs.org" },
@@ -104,16 +104,15 @@ export const projects: Project[] = [
     description:
       "A Persian, right-to-left web platform for the whole training cycle: coaches build multi-week programs, assign them to athletes and tailor every set, while athletes follow, log and track their progress.",
     role: "Full-stack developer",
-    year: "[FITCOACH_YEAR]",
+    year: "2026",
     url: "https://github.com/arvinzaferani/fitcoach",
-    icon: "/projects/fitcoach/icon.svg",
+    icon: "/projects/fitcoach/icon.png",
     image: "/projects/fitcoach/preview.png",
     stack: [
       { name: "Next.js", url: "https://nextjs.org" },
       { name: "NestJS", url: "https://nestjs.com" },
       { name: "PostgreSQL", url: "https://www.postgresql.org" },
       { name: "Prisma", url: "https://www.prisma.io" },
-      { name: "Passport", url: "https://www.passportjs.org" },
       { name: "JWT", url: "https://jwt.io" },
       { name: "MinIO", url: "https://min.io" },
     ],
@@ -138,57 +137,91 @@ export type OtherProject = {
   description: string;
   year?: string;
   url?: string;
+  /** Who the work was done for — the client or the company. */
+  org?: string;
+  stack?: StackItem[];
 };
 
 export const otherProjects: OtherProject[] = [
+  
+  {
+    slug: "kamva",
+    name: "Kamva Chart",
+    url: "https://arvinzaferani.github.io/kamva/",
+    description:
+      "Reusable and customizable charting library for modern web applications, Published and maintained the library as a public npm package.",
+    year: "2026",
+    // Personal project — no client, so no `org`.
+    stack: [
+      { name: "TypeScript", url: "https://www.typescriptlang.org" },
+    ],
+  },
+
+  {
+    slug: "marquize",
+    name: "Marquize",
+    url: "https://marquise.iweb360.ir/",
+    description:
+      "Dynamic form rendering engine for an industry accounting platform, Web Negah — a schema-driven approach that generates the UI from backend templates instead of hand-coding it.",
+    year: "2025",
+    org: "Web Negah",
+  },
   {
     slug: "asbabchi-admin",
+    url: "https://admin.asbabchi.shop/",
     name: "Asbabchi Admin Panel",
     description:
       "Urban freight management, Web Negah — refactored, maintained and extended the core admin panel features for reliability and scalability.",
     year: "2025",
+    org: "Web Negah",
+    stack: [
+      { name: "TypeScript", url: "https://www.typescriptlang.org" },
+      { name: "React", url: "https://react.dev/" },
+      { name: "NestJS", url: "https://nestjs.com" },
+    ],
   },
   {
     slug: "tond-hungary",
+    url: "https://tond.hu",
     name: "Tond Hungary",
     description:
       "On-demand services platform — customer, expert and admin panels in Next.js, plus NestJS work on expert requests, payments, wallet and order filtering.",
     year: "2025",
-  },
-  {
-    slug: "marquize",
-    name: "Marquize",
-    description:
-      "Dynamic form rendering engine for an industry accounting platform, Web Negah — a schema-driven approach that generates the UI from backend templates instead of hand-coding it.",
-    year: "2025",
+    org: "Web Negah",
+    stack: [
+      { name: "TypeScript", url: "https://www.typescriptlang.org" },
+      { name: "Next.js", url: "https://nextjs.org" },
+      { name: "NestJS", url: "https://nestjs.com" },
+    ],
   },
   {
     slug: "adak",
+    url:"https://panel.barhub.ir",
     name: "Adak",
     description:
       "Logistics platform admin panel, Safora Financial Group — Vue, TypeScript, Axios and Pinia, with complex dynamic forms and custom validation.",
     year: "2024",
+    org: "Safora Financial Group",
+    stack: [
+      { name: "TypeScript", url: "https://www.typescriptlang.org" },
+      { name: "Vue", url: "https://vuejs.org" },
+      { name: "Axios", url: "https://axios-http.com" },
+      { name: "Pinia", url: "https://pinia.vuejs.org" },
+    ],
   },
   {
     slug: "zanjireh-tamin",
+    url: "https://zanjiretamin.com/",
     name: "Zanjireh Tamin",
     description:
       "Supply chain management platform, Safora Financial Group — features, landing pages and authentication in Vue.js, TypeScript and Pinia.",
     year: "2024",
-  },
-  {
-    slug: "teachsha",
-    name: "Teachsha",
-    description:
-      "Online quiz platform, Hash Studio — responsive Vue.js interfaces with Axios handling API requests and data flow between front end and back end.",
-    year: "2024",
-  },
-  {
-    slug: "blog-platform",
-    name: "Blog Platform",
-    description:
-      "Personal project — React, TypeScript, Redux Toolkit, Node.js, Express and MongoDB, with a RESTful API for posts and user profiles.",
-    year: "2024",
+    org: "Safora Financial Group",
+    stack: [
+      { name: "TypeScript", url: "https://www.typescriptlang.org" },
+      { name: "Vue.js", url: "https://vuejs.org" },
+      { name: "Pinia", url: "https://pinia.vuejs.org" },
+    ],
   },
 ];
 

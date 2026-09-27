@@ -57,7 +57,7 @@ body {
 
 /* Keep the saffron accent quiet. */
 .accent-dot {
-  box-shadow: 0 0 0 3px hsl(38 92% 48% / 0.18);
+  box-shadow: 0 0 0 3px hsla(103, 71%, 68%, 0.18);
 }
 
 @keyframes hero-rise {
@@ -80,6 +80,20 @@ body {
   }
 }
 
+/* §3 — the SCROLL nudge: a short downward bob with a fade at the extremes, so
+   it reads as an invitation to keep going rather than as an animation. */
+@keyframes scroll-nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(3px);
+    opacity: 1;
+  }
+}
+
 @utility animate-hero-rise {
   animation: hero-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -94,6 +108,10 @@ body {
 
 @utility animate-rise {
   animation: hero-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@utility animate-scroll-nudge {
+  animation: scroll-nudge 1.6s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

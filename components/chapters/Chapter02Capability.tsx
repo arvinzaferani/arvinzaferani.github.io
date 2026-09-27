@@ -2,16 +2,7 @@
 
 import { useState } from "react";
 import type { Dictionary } from "@/lib/dictionaries";
-
-const stack = [
-  { name: "TypeScript", url: "https://www.typescriptlang.org" },
-  { name: "React", url: "https://react.dev" },
-  { name: "Next.js", url: "https://nextjs.org" },
-  { name: "Node.js", url: "https://nodejs.org" },
-  { name: "NestJS", url: "https://nestjs.com" },
-  { name: "PostgreSQL", url: "https://www.postgresql.org" },
-  { name: "Docker", url: "https://www.docker.com" },
-];
+import { skillCategories } from "@/lib/skills";
 
 /**
  * §18 — CAPABILITY was previously compressed to ~1.3vh. It now holds an
@@ -99,20 +90,30 @@ export default function Chapter02Capability({ t }: { t: Dictionary }) {
         <p className="text-[0.65rem] uppercase tracking-[0.3em] text-foreground/40">
           {t.capability.stackLabel}
         </p>
-        <ul className="mt-4 flex flex-wrap gap-x-3 gap-y-2">
-          {stack.map((tech) => (
-            <li key={tech.name}>
-              <a
-                href={tech.url}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="text-sm text-foreground/60 underline decoration-transparent underline-offset-4 transition-colors duration-300 hover:text-foreground hover:decoration-accent"
-              >
-                {tech.name}
-              </a>
-            </li>
+
+        <div className="mt-6 grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4">
+          {skillCategories.map((category) => (
+            <div key={category.id}>
+              <h3 className="text-[0.6rem] uppercase tracking-[0.2em] text-foreground/40">
+                {category.label}
+              </h3>
+              <ul className="mt-4 flex flex-col gap-y-2">
+                {category.skills.map((skill) => (
+                  <li key={skill.name}>
+                    <a
+                      href={skill.url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="text-sm text-foreground/60 underline decoration-transparent underline-offset-4 transition-colors duration-300 hover:text-foreground hover:decoration-accent"
+                    >
+                      {skill.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );

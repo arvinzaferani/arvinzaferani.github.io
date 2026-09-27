@@ -64,10 +64,12 @@ export const en: Dictionary = {
       deploy: "DEPLOY",
     },
     screenshotPending: "Screenshot pending",
+    scrollHint: "Scroll",
   },
   otherWork: {
     label: "OTHER WORK",
     heading: "Other projects",
+    orgLabel: "ORG",
   },
   process: {
     label: "PROCESS",
@@ -135,9 +137,9 @@ export const en: Dictionary = {
   chapters: [
     { id: "intro", label: "INTRO" },
     { id: "capability", label: "CAPABILITY" },
+    { id: "about", label: "ABOUT" },
     { id: "proof", label: "PROOF" },
     { id: "process", label: "PROCESS" },
-    { id: "about", label: "ABOUT" },
     { id: "contact", label: "CONTACT" },
   ],
 };
