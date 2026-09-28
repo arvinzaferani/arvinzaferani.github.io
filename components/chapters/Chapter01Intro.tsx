@@ -110,14 +110,14 @@ export default function Chapter01Intro({ t }: { t: Dictionary }) {
                 {t.hero.ctaSecondary} →
               </a>
             </div>
-            <span ref={refEl} className={pinned ? "invisible" : undefined}>
+            <span ref={refEl} className={`md:animate-hero-fade md:animate-hero-rise ${pinned ? "invisible" : undefined}`}>
                 <Badge label={t.hero.available} />
               </span>
 
               {typeof document !== "undefined" &&
                 createPortal(
                   pinned ? (
-                    <span className="fixed top-4 start-6 z-50">
+                    <span className="fixed top-4 md:animate-hero-fade md:animate-hero-rise start-6 z-50 transition-opacity duration-500">
                       <Badge label={t.hero.available} floating />
                     </span>
                   ) : null,
