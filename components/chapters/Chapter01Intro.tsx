@@ -115,6 +115,7 @@ export default function Chapter01Intro({ t }: { t: Dictionary }) {
               </span>
 
               {typeof document !== "undefined" &&
+              
                 createPortal(
                   pinned ? (
                     <span className="fixed top-4 md:animate-hero-fade md:animate-hero-rise start-6 z-50 transition-opacity duration-500">
